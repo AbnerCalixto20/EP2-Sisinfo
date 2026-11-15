@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Portfólio de Projetos - 3D{% endblock %}
+
+{% block content %}
+<section class="home-intro">
+    <h2>Bem-vindo ao Meu Portfólio de Projetos 3D</h2>
+    <div class="home-content">
+        <p>Olá! Sou Abner, um entusiasta e criador de Modelagens 3D.</p>
+        <p>Neste espaço, compartilho meus principais projetos de fabricação digital, detalhando desde a concepção da ideia até a solução final aplicada.</p>
+    </div>
+</section>
+
+<section class="home-projects">
+    <div class="actions-bar">
+        <h3>Publicações do Portfólio</h3>
+        <a href="{% url 'posts:create' %}" class="btn btn-primary">+ Novo Post</a>
+    </div>
+
+    {% if post_list %}
+    <div class="project-grid">
+        {% for post in post_list %}
+        <article class="project-card">
+            <div>
+                <h3><a href="{% url 'posts:detail' post.pk %}">{{ post.title }}</a></h3>
+                <p class="post-meta">Publicado em {{ post.pub_date|date:"d/m/Y H:i" }}</p>
+            </div>
+            <div>
+                <a href="{% url 'posts:detail' post.pk %}" class="read-more">Ver Post</a>
+                <div class="post-actions">
+                    <a href="{% url 'posts:update' post.pk %}" class="btn btn-secondary">Editar</a>
+                    <a href="{% url 'posts:delete' post.pk %}" class="btn btn-danger">Remover</a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>Nenhum post publicado ainda. Clique em <strong>+ Novo Post</strong> para criar o primeiro!</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

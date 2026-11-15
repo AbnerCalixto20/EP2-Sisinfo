@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }} - Portfólio de Projetos - 3D{% endblock %}
+
+{% block content %}
+<article class="single-page">
+    <header class="page-header">
+        <h2>{{ post.title }}</h2>
+        <p class="post-date">Publicado em {{ post.pub_date|date:"d/m/Y H:i" }}</p>
+    </header>
+
+    <div class="page-content">
+        {{ post.content|safe }}
+    </div>
+
+    <div class="post-actions">
+        <a href="{% url 'posts:list' %}" class="btn btn-secondary">Voltar para Posts</a>
+        <a href="{% url 'posts:update' post.pk %}" class="btn btn-primary">Editar</a>
+        <a href="{% url 'posts:delete' post.pk %}" class="btn btn-danger">Remover</a>
+    </div>
+</article>
+{% endblock %}

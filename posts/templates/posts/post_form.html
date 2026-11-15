@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if post %}Editar Post{% else %}Novo Post{% endif %} - Portfólio de Projetos - 3D{% endblock %}
+
+{% block content %}
+<section class="form-card">
+    <header class="page-header">
+        <h2>{% if post %}Editar Post{% else %}Criar Novo Post{% endif %}</h2>
+    </header>
+
+    <form method="post" class="styled-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_title">Título:</label>
+            <input type="text" id="id_title" name="title" value="{{ post.title|default:'' }}">
+        </div>
+
+        <div class="form-group">
+            <label for="id_content">Conteúdo (HTML):</label>
+            <textarea id="id_content" name="content">{{ post.content|default:'' }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="id_pub_date">Data de postagem (opcional):</label>
+            <input type="datetime-local" id="id_pub_date" name="pub_date" value="{% if post %}{{ post.pub_date|date:'Y-m-d\TH:i' }}{% endif %}">
+        </div>
+
+        <div class="post-actions">
+            <button type="submit" class="btn btn-primary">{% if post %}Salvar Alterações{% else %}Publicar Post{% endif %}</button>
+            {% if post %}
+            <a href="{% url 'posts:detail' post.pk %}" class="btn btn-secondary">Cancelar</a>
+            {% else %}
+            <a href="{% url 'posts:list' %}" class="btn btn-secondary">Cancelar</a>
+            {% endif %}
+        </div>
+    </form>
+</section>
+{% endblock %}

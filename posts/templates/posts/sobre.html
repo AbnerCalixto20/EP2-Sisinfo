@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Sobre Mim - Portfólio de Projetos - 3D{% endblock %}
+
+{% block content %}
+<article class="single-page">
+    <header class="page-header">
+        <h2>Sobre Mim</h2>
+    </header>
+    <div class="page-content">
+        <p>Meu nome é Ábner Calixto. Sou estudante de Engenharia Mecatrônica na Escola Politécnica da USP e um entusiasta focado na interseção entre design mecânico, desenvolvimento de hardware e fabricação digital.</p>
+        <p>Minha trajetória na modelagem 3D é fortemente guiada pela engenharia aplicada e pela necessidade de criar soluções para o mundo físico. Em vez de focar apenas na estética, utilizo a modelagem para desenvolver componentes funcionais que muitas vezes se integram a projetos de automação, placas de circuito impresso (PCBs) e dispositivos mecatrônicos complexos.</p>
+        <p>No meu fluxo de trabalho, utilizo o SolidWorks para o detalhamento paramétrico e desenho de componentes de engenharia, aliado ao UltiMaker Cura para ajustar escalas, tolerâncias e otimizar os processos de manufatura aditiva (impressão 3D). Além disso, possuo vivência na integração dessas peças com processos de fabricação a laser. Meu objetivo é sempre garantir que cada modelo possua rigor mecânico, precisão dimensional e esteja perfeitamente pronto para a montagem final, resolvendo problemas específicos com eficiência.</p>
+    </div>
+    <div class="post-actions">
+        <a href="{% url 'posts:list' %}" class="btn btn-secondary">Voltar para os Posts</a>
+    </div>
+</article>
+{% endblock %}

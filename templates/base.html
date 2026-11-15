@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portfólio de Projetos - 3D{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <h1><a href="{% url 'posts:list' %}">Portfólio de Projetos - 3D</a></h1>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="{% url 'posts:list' %}">Home</a></li>
+                <li><a href="{% url 'posts:about' %}">Sobre Mim</a></li>
+                <li><a href="{% url 'posts:create' %}">Novo Post</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Abner - Portfólio de Modelagem 3D.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Remover Post - Portfólio de Projetos - 3D{% endblock %}
+
+{% block content %}
+<section class="confirm-card">
+    <header class="page-header">
+        <h2>Confirmar Remoção</h2>
+    </header>
+
+    <p>Tem certeza de que deseja remover o post <strong>"{{ post.title }}"</strong>?</p>
+    <p class="post-meta">Publicado em {{ post.pub_date|date:"d/m/Y H:i" }}</p>
+
+    <form method="post" class="post-actions">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirmar Remoção</button>
+        <a href="{% url 'posts:detail' post.pk %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</section>
+{% endblock %}
