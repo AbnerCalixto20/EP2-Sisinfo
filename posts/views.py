@@ -1,52 +1,54 @@
-from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse, reverse_lazy
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    TemplateView,
+    UpdateView,
+)
 
 from .forms import PostForm
 from .models import Post
 
 
-def about(request):
-    return render(request, 'posts/sobre.html')
+class AboutView(TemplateView):
+    template_name = 'posts/sobre.html'
 
 
-def list_posts(request):
-    posts = Post.objects.all()
-    return render(request, 'posts/post_list.html', {'post_list': posts})
+class PostListView(ListView):
+    model = Post
+    template_name = 'posts/post_list.html'
+    context_object_name = 'post_list'
 
 
-def detail_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'posts/post_detail.html', {'post': post})
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'posts/post_detail.html'
+    context_object_name = 'post'
 
 
-def create_post(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save()
-            return redirect('posts:detail', pk=post.pk)
-    else:
-        form = PostForm()
+class PostCreateView(CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'posts/post_form.html'
 
-    return render(request, 'posts/post_form.html', {'form': form})
+    def get_success_url(self):
+        return reverse('posts:detail', kwargs={'pk': self.object.pk})
 
 
-def update_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            post = form.save()
-            return redirect('posts:detail', pk=post.pk)
-    else:
-        form = PostForm(instance=post)
+class PostUpdateView(UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'posts/post_form.html'
+    context_object_name = 'post'
 
-    return render(request, 'posts/post_form.html', {'form': form, 'post': post})
+    def get_success_url(self):
+        return reverse('posts:detail', kwargs={'pk': self.object.pk})
 
 
-def delete_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == 'POST':
-        post.delete()
-        return redirect('posts:list')
-
-    return render(request, 'posts/post_confirm_delete.html', {'post': post})
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = 'posts/post_confirm_delete.html'
+    context_object_name = 'post'
+    success_url = reverse_lazy('posts:list')
