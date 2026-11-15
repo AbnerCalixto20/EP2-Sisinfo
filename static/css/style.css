@@ -279,6 +279,46 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
+/* Comentários */
+.comments-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e6e6ee;
+}
+
+.comments-section h3 {
+    color: #2c3e50;
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.comment-card {
+    background: #f8f9fc;
+    border: 1px solid #e2e6ef;
+    border-left: 4px solid #2980b9;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.comment-text p:last-child {
+    margin-bottom: 0;
+}
+
 /* Footer */
 .main-footer {
     background-color: #2c3e50;
