@@ -158,6 +158,14 @@ body {
     text-decoration: none;
 }
 
+.project-card a.btn {
+    color: #fff;
+}
+
+.project-card a.btn:hover {
+    text-decoration: none;
+}
+
 .project-card a:hover {
     text-decoration: underline;
 }
@@ -317,6 +325,54 @@ body {
 
 .comment-text p:last-child {
     margin-bottom: 0;
+}
+
+/* Categorias */
+.post-categories {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.categories-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.category-badge {
+    display: inline-block;
+    background-color: #eaf2f8;
+    color: #21618c;
+    border: 1px solid #aed6f1;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.category-badge:hover {
+    background-color: #d4e6f1;
+}
+
+.styled-form ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.35rem;
+}
+
+.styled-form ul label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: normal;
+    cursor: pointer;
 }
 
 /* Footer */

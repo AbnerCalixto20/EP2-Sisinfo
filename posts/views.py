@@ -10,7 +10,7 @@ from django.views.generic import (
 )
 
 from .forms import CommentForm, PostForm
-from .models import Comment, Post
+from .models import Category, Comment, Post
 
 
 class AboutView(TemplateView):
@@ -80,3 +80,20 @@ class CommentCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('posts:detail', kwargs={'pk': self.post_obj.pk})
+
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'posts/category_list.html'
+    context_object_name = 'category_list'
+
+
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'posts/post_list.html'
+    context_object_name = 'category'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['post_list'] = self.object.posts.all()
+        return context

@@ -7,6 +7,16 @@
     <header class="page-header">
         <h2>{{ post.title }}</h2>
         <p class="post-date">Publicado em {{ post.pub_date|date:"d/m/Y H:i" }}</p>
+        {% with categories=post.categories.all %}
+        {% if categories %}
+        <div class="post-categories">
+            <span class="categories-label">Categorias:</span>
+            {% for category in categories %}
+            <a href="{% url 'posts:category_detail' category.pk %}" class="category-badge">{{ category.name }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
     </header>
 
     <div class="page-content">
