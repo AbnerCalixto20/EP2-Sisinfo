@@ -1,12 +1,21 @@
 from django.contrib import admin
 
-from .models import Comment, Post
+from .models import Category, Comment, Post
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    search_fields = ('name', 'description')
+    ordering = ('name',)
 
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'pub_date')
+    list_filter = ('categories', 'pub_date')
     search_fields = ('title', 'content')
+    filter_horizontal = ('categories',)
     ordering = ('-pub_date',)
 
 

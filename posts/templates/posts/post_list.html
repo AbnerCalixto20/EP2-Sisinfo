@@ -1,8 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}Portfólio de Projetos - 3D{% endblock %}
+{% block title %}{% if category %}{{ category.name }} - Categorias{% else %}Portfólio de Projetos - 3D{% endif %}{% endblock %}
 
 {% block content %}
+{% if category %}
+<section class="home-intro">
+    <h2>Categoria: {{ category.name }}</h2>
+    {% if category.description %}
+    <div class="home-content">
+        <p>{{ category.description }}</p>
+    </div>
+    {% endif %}
+</section>
+{% else %}
 <section class="home-intro">
     <h2>Bem-vindo ao Meu Portfólio de Projetos 3D</h2>
     <div class="home-content">
@@ -10,11 +20,17 @@
         <p>Neste espaço, compartilho meus principais projetos de fabricação digital, detalhando desde a concepção da ideia até a solução final aplicada.</p>
     </div>
 </section>
+{% endif %}
 
 <section class="home-projects">
     <div class="actions-bar">
-        <h3>Publicações do Portfólio</h3>
-        <a href="{% url 'posts:create' %}" class="btn btn-primary">+ Novo Post</a>
+        <h3>{% if category %}Posts em {{ category.name }}{% else %}Publicações do Portfólio{% endif %}</h3>
+        <div>
+            {% if category %}
+            <a href="{% url 'posts:category_list' %}" class="btn btn-secondary">Todas as Categorias</a>
+            {% endif %}
+            <a href="{% url 'posts:create' %}" class="btn btn-primary">+ Novo Post</a>
+        </div>
     </div>
 
     {% if post_list %}
@@ -37,7 +53,11 @@
     </div>
     {% else %}
     <div class="empty-state">
+        {% if category %}
+        <p>Nenhum post cadastrado nesta categoria ainda.</p>
+        {% else %}
         <p>Nenhum post publicado ainda. Clique em <strong>+ Novo Post</strong> para criar o primeiro!</p>
+        {% endif %}
     </div>
     {% endif %}
 </section>

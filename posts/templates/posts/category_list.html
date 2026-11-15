@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Categorias - Portfólio de Projetos - 3D{% endblock %}
+
+{% block content %}
+<section class="home-intro">
+    <h2>Categorias de Projetos</h2>
+    <div class="home-content">
+        <p>Explore os posts organizados por área de atuação, tecnologia e fabricação digital.</p>
+    </div>
+</section>
+
+<section class="home-projects">
+    <div class="actions-bar">
+        <h3>Todas as Categorias</h3>
+        <a href="{% url 'posts:list' %}" class="btn btn-secondary">Ver Todos os Posts</a>
+    </div>
+
+    {% if category_list %}
+    <div class="project-grid">
+        {% for category in category_list %}
+        <article class="project-card">
+            <div>
+                <h3><a href="{% url 'posts:category_detail' category.pk %}">{{ category.name }}</a></h3>
+                {% if category.description %}
+                <p>{{ category.description }}</p>
+                {% endif %}
+                <p class="post-meta">{{ category.posts.count }} post(s)</p>
+            </div>
+            <div>
+                <a href="{% url 'posts:category_detail' category.pk %}" class="read-more">Ver Posts da Categoria</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>Nenhuma categoria cadastrada ainda.</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
